@@ -79,3 +79,9 @@ to_do_list.add_task(task2)
 
 # Display tasks
 to_do_list.display_tasks()
+
+# Sort tasks by priority
+to_do_list.sort_tasks(by="priority")
+
+# Display sorted tasks
+to_do_list.display_tasks()
