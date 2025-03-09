@@ -1,4 +1,7 @@
-class Task():
+import tkinter as tk
+from tkinter import messagebox
+
+class Task:
     def __init__(self, title, priority, deadline, description, completed=False):
         self.title = title
         self.priority = priority
@@ -32,7 +35,7 @@ class Task():
             self.description = description
         print("Task updated.")
 
-class ToDoList():
+class ToDoList:
     def __init__(self):
         self.tasks = []
 
@@ -63,25 +66,55 @@ class ToDoList():
         for task in filtered_tasks:
             print(task.display_task())
 
-# Create tasks
-task1 = Task("Task 1", 1, "2021-12-31", "Description 1")
-task2 = Task("Task 2", 2, "2021-12-30", "Description 2")
-task3 = Task("Task 3", 3, "2021-12-29", "Description 3")
-task4 = Task("Task 4", 4, "2021-12-28", "Description 4")
-task5 = Task("Task 5", 5, "2021-12-27", "Description 5")
+class ToDoApp:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("To-Do Application")
+        self.to_do_list = ToDoList()
 
-# Create a ToDoList object
-to_do_list = ToDoList()
+        self.title_label = tk.Label(root, text="Title")
+        self.title_label.pack()
+        self.title_entry = tk.Entry(root)
+        self.title_entry.pack()
 
-# Add tasks to the list
-to_do_list.add_task(task1)
-to_do_list.add_task(task2)   
+        self.priority_label = tk.Label(root, text="Priority")
+        self.priority_label.pack()
+        self.priority_entry = tk.Entry(root)
+        self.priority_entry.pack()
 
-# Display tasks
-to_do_list.display_tasks()
+        self.deadline_label = tk.Label(root, text="Deadline")
+        self.deadline_label.pack()
+        self.deadline_entry = tk.Entry(root)
+        self.deadline_entry.pack()
 
-# Sort tasks by priority
-to_do_list.sort_tasks(by="priority")
+        self.description_label = tk.Label(root, text="Description")
+        self.description_label.pack()
+        self.description_entry = tk.Entry(root)
+        self.description_entry.pack()
 
-# Display sorted tasks
-to_do_list.display_tasks()
+        self.add_button = tk.Button(root, text="Add Task", command=self.add_task)
+        self.add_button.pack()
+
+        self.sort_button = tk.Button(root, text="Sort Tasks by Priority", command=self.sort_tasks)
+        self.sort_button.pack()
+
+        self.tasks_listbox = tk.Listbox(root)
+        self.tasks_listbox.pack()
+
+    def add_task(self):
+        title = self.title_entry.get()
+        priority = int(self.priority_entry.get())
+        deadline = self.deadline_entry.get()
+        description = self.description_entry.get()
+        task = Task(title, priority, deadline, description)
+        self.to_do_list.add_task(task)
+        messagebox.showinfo("Info", "Task added successfully")
+
+    def sort_tasks(self):
+        self.to_do_list.sort_tasks(by="priority")
+        self.display_tasks()
+
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = ToDoApp(root)
+    root.mainloop()
