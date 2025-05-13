@@ -1,0 +1,20 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"name": "space-cooker-genesis",
+			"path": "sigma game/space-cooker-genesis"
+		}
+	],
+	"settings": {
+		"liveServer.settings.port": 5501,
+		"github.copilot.enable": {
+			"*": true,
+			"plaintext": false,
+			"markdown": false,
+			"scminput": false
+		}
+	}
+}
